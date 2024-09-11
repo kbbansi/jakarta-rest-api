@@ -9,11 +9,10 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeeDTO {
-//    private Long id; commenting this out as this can potentially be used by malicious actors to brute force our system
+public class CreateEmployeeDTO {
     private String firstName;
     private String lastName;
     private String email;
+    private String password;
     private LocalDate birthday;
-    private String displayID;
 }

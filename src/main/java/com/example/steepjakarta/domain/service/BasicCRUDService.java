@@ -1,6 +1,6 @@
 package com.example.steepjakarta.domain.service;
 
-public interface BasicCRUDService<T> {
+public interface BasicCRUDService<T, R> {
 
     default void delete(Long id) {}
 
@@ -8,9 +8,9 @@ public interface BasicCRUDService<T> {
         return null;
     }
 
-    default void update(Long id,T obj) {}
+    default void update(Long id, T obj) {}
 
-    default T get(Long id) { return null; }
+    default R get(Long id) { return null; }
 
-    default Iterable<T> getAll() { return null; }
+    default Iterable<R> getAll() { return null; }
 }

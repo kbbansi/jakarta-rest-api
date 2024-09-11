@@ -1,5 +1,6 @@
 package com.example.steepjakarta.api;
 
+import com.example.steepjakarta.domain.datatransfer.CreateEmployeeDTO;
 import com.example.steepjakarta.domain.datatransfer.EmployeeDTO;
 import com.example.steepjakarta.domain.service.EmployeeService;
 import jakarta.inject.Inject;
@@ -32,7 +33,7 @@ public class EmployeeResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createEmployee(EmployeeDTO employeeDTO) {
+    public Response createEmployee(CreateEmployeeDTO employeeDTO) {
         employeeService.create(employeeDTO);
         return Response.ok(employeeDTO).build();
     }
@@ -41,7 +42,7 @@ public class EmployeeResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateEmployee(@PathParam("id") Long id, EmployeeDTO employeeDTO) {
+    public Response updateEmployee(@PathParam("id") Long id, CreateEmployeeDTO employeeDTO) {
         employeeService.update(id, employeeDTO);
         return Response.ok(employeeDTO).build();
     }

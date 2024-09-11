@@ -1,5 +1,6 @@
 package com.example.steepjakarta.api;
 
+import com.example.steepjakarta.domain.datatransfer.CreateEmployeeDTO;
 import com.example.steepjakarta.domain.datatransfer.EmployeeDTO;
 import com.example.steepjakarta.domain.service.EmployeeService;
 import jakarta.ws.rs.core.Response;
@@ -26,15 +27,22 @@ public class EmployeeResourceTest {
     @InjectMocks
     private EmployeeResource employeeResource;
 
+    private CreateEmployeeDTO createEmployeeDTO;
     private EmployeeDTO employeeDTO;
 
     @BeforeEach
     void setUp() {
+        createEmployeeDTO = new CreateEmployeeDTO();
+        createEmployeeDTO.setFirstName("John");
+        createEmployeeDTO.setLastName("Doe");
+        createEmployeeDTO.setEmail("john.doe@example.com");
+        createEmployeeDTO.setPassword("password123");
+        createEmployeeDTO.setBirthday(LocalDate.now());
+
         employeeDTO = new EmployeeDTO();
         employeeDTO.setFirstName("John");
         employeeDTO.setLastName("Doe");
         employeeDTO.setEmail("john.doe@example.com");
-        employeeDTO.setPassword("password123");
         employeeDTO.setBirthday(LocalDate.now());
     }
 
@@ -63,23 +71,23 @@ public class EmployeeResourceTest {
     @Test
     void testCreateEmployee() {
         String expectedId = "123e4567e89b12d3a456426614174000";
-        when(employeeService.create(any(EmployeeDTO.class))).thenReturn(expectedId);
+        when(employeeService.create(any(CreateEmployeeDTO.class))).thenReturn(expectedId);
 
 
-        Response response = employeeResource.createEmployee(employeeDTO);
+        Response response = employeeResource.createEmployee(createEmployeeDTO);
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
-        verify(employeeService, times(1)).create(any(EmployeeDTO.class));
+        verify(employeeService, times(1)).create(any(CreateEmployeeDTO.class));
     }
 
     @Test
     void testUpdateEmployee() {
-        doNothing().when(employeeService).update(eq(1L), any(EmployeeDTO.class));
+        doNothing().when(employeeService).update(eq(1L), any(CreateEmployeeDTO.class));
 
-        Response response = employeeResource.updateEmployee(1L, employeeDTO);
+        Response response = employeeResource.updateEmployee(1L, createEmployeeDTO);
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
-        verify(employeeService, times(1)).update(eq(1L), any(EmployeeDTO.class));
+        verify(employeeService, times(1)).update(eq(1L), any(CreateEmployeeDTO.class));
     }
 
     @Test
