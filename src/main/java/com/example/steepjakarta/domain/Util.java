@@ -1,5 +1,6 @@
 package com.example.steepjakarta.domain;
 
+import com.example.steepjakarta.domain.datatransfer.CreateEmployeeDTO;
 import com.example.steepjakarta.domain.datatransfer.EmployeeDTO;
 import jakarta.enterprise.context.ApplicationScoped;
 import org.apache.commons.lang3.Validate;
@@ -14,7 +15,7 @@ public class Util {
         return UUID.randomUUID().toString().replace("-", "");
     }
 
-    public static void validateEmployee(EmployeeDTO employee) {
+    public static void validateEmployee(CreateEmployeeDTO employee) {
         Validate.notNull(employee, "Employee cannot be null");
         Validate.notEmpty(employee.getFirstName(), "First name cannot be empty");
         Validate.notEmpty(employee.getLastName(), "Last name cannot be empty");

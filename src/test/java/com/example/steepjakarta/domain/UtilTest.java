@@ -1,4 +1,5 @@
 package com.example.steepjakarta.domain;
+import com.example.steepjakarta.domain.datatransfer.CreateEmployeeDTO;
 import com.example.steepjakarta.domain.datatransfer.EmployeeDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +22,7 @@ public class UtilTest {
 
     @Test
     void testValidateEmployee() {
-        EmployeeDTO employeeDTO = new EmployeeDTO();
+        CreateEmployeeDTO employeeDTO = new CreateEmployeeDTO();
         employeeDTO.setFirstName("John");
         employeeDTO.setLastName("Doe");
         employeeDTO.setEmail("john.doe@example.com");
@@ -33,7 +34,7 @@ public class UtilTest {
 
     @Test
     void testValidateEmployeeInvalidEmail() {
-        EmployeeDTO employeeDTO = new EmployeeDTO();
+        CreateEmployeeDTO employeeDTO = new CreateEmployeeDTO();
         employeeDTO.setFirstName("John");
         employeeDTO.setLastName("Doe");
         employeeDTO.setEmail("invalid-email");

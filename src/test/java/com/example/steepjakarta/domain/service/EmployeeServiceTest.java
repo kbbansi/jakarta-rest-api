@@ -1,6 +1,7 @@
 package com.example.steepjakarta.domain.service;
 
 import com.example.steepjakarta.domain.dataaccess.EmployeeRepository;
+import com.example.steepjakarta.domain.datatransfer.CreateEmployeeDTO;
 import com.example.steepjakarta.domain.datatransfer.EmployeeDTO;
 import com.example.steepjakarta.domain.models.Employee;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,12 +28,12 @@ class EmployeeServiceTest {
     @Mock
     private EmployeeRepository employeeRepository;
 
-    private EmployeeDTO employeeDTO;
+    private CreateEmployeeDTO employeeDTO;
     private Employee employee;
 
     @BeforeEach
     void setUp() {
-        employeeDTO = new EmployeeDTO();
+        employeeDTO = new CreateEmployeeDTO();
         employeeDTO.setFirstName("John");
         employeeDTO.setLastName("Doe");
         employeeDTO.setEmail("john.doe@example.com");

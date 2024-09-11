@@ -2,6 +2,7 @@ package com.example.steepjakarta.domain.service;
 
 import com.example.steepjakarta.domain.Util;
 import com.example.steepjakarta.domain.dataaccess.EmployeeRepository;
+import com.example.steepjakarta.domain.datatransfer.CreateEmployeeDTO;
 import com.example.steepjakarta.domain.datatransfer.EmployeeDTO;
 import com.example.steepjakarta.domain.models.Employee;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @ApplicationScoped
-public class EmployeeService implements BasicCRUDService<EmployeeDTO> {
+public class EmployeeService implements BasicCRUDService<CreateEmployeeDTO, EmployeeDTO> {
 
     @Inject
     EmployeeRepository employeeRepository;
@@ -27,7 +28,7 @@ public class EmployeeService implements BasicCRUDService<EmployeeDTO> {
     }
 
     @Override
-    public String create(EmployeeDTO employeeDto) {
+    public String create(CreateEmployeeDTO employeeDto) {
         Util.validateEmployee(employeeDto);
 
         Employee employee = mapToEmployee(employeeDto);
@@ -36,7 +37,7 @@ public class EmployeeService implements BasicCRUDService<EmployeeDTO> {
 
 
     @Override
-    public void update(Long id, EmployeeDTO employeeDTO) {
+    public void update(Long id, CreateEmployeeDTO employeeDTO) {
         Util.validateEmployee(employeeDTO);
 
         Employee employee = employeeRepository.findById(id);
@@ -65,7 +66,7 @@ public class EmployeeService implements BasicCRUDService<EmployeeDTO> {
     }
 
 
-    private Employee mapToEmployee(EmployeeDTO employeeDto) {
+    private Employee mapToEmployee(CreateEmployeeDTO employeeDto) {
         return Employee.builder()
                 .firstName(employeeDto.getFirstName())
                 .lastName(employeeDto.getLastName())
