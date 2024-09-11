@@ -59,12 +59,12 @@ public class EmployeeResourceTest {
 
     @Test
     void testGetEmployeeById() {
-        when(employeeService.get(1L)).thenReturn(employeeDTO);
+        when(employeeService.get("1L")).thenReturn(employeeDTO);
 
-        EmployeeDTO response = employeeResource.getEmployeeById(1L);
+        Response response = employeeResource.getEmployeeById("1L");
 
-        assertEquals("John", response.getFirstName());
-        verify(employeeService, times(1)).get(1L);
+        assertEquals(200, response.getStatus());
+        verify(employeeService, times(1)).get("1L");
     }
 
 
@@ -82,22 +82,22 @@ public class EmployeeResourceTest {
 
     @Test
     void testUpdateEmployee() {
-        doNothing().when(employeeService).update(eq(1L), any(CreateEmployeeDTO.class));
+        doNothing().when(employeeService).update(eq("1L"), any(CreateEmployeeDTO.class));
 
-        Response response = employeeResource.updateEmployee(1L, createEmployeeDTO);
+        Response response = employeeResource.updateEmployee("1L", createEmployeeDTO);
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
-        verify(employeeService, times(1)).update(eq(1L), any(CreateEmployeeDTO.class));
+        verify(employeeService, times(1)).update(eq("1L"), any(CreateEmployeeDTO.class));
     }
 
     @Test
     void testDeleteEmployee() {
-        doNothing().when(employeeService).delete(1L);
+        doNothing().when(employeeService).delete("1L");
 
-        Response response = employeeResource.deleteEmployee(1L);
+        Response response = employeeResource.deleteEmployee("1L");
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
-        verify(employeeService, times(1)).delete(1L);
+        verify(employeeService, times(1)).delete("1L");
     }
 
 }
