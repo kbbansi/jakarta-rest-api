@@ -50,9 +50,9 @@ class EmployeeServiceTest {
 
     @Test
     void delete() {
-        employeeService.delete(1L);
+        employeeService.delete("1L");
 
-        verify(employeeRepository, times(1)).delete(1L);
+        verify(employeeRepository, times(1)).delete("1L");
     }
 
     @Test
@@ -64,21 +64,21 @@ class EmployeeServiceTest {
 
     @Test
     void update() {
-        when(employeeRepository.findById(1L)).thenReturn(employee);
+        when(employeeRepository.findById("1L")).thenReturn(employee);
 
-        employeeService.update(1L, employeeDTO);
+        employeeService.update("1L", employeeDTO);
 
         verify(employeeRepository, times(1)).update(any(Employee.class));
     }
 
     @Test
     void get() {
-        when(employeeRepository.findById(1L)).thenReturn(employee);
+        when(employeeRepository.findById("1L")).thenReturn(employee);
 
-        EmployeeDTO result = employeeService.get(1L);
+        EmployeeDTO result = employeeService.get("1L");
 
         assertEquals("John", result.getFirstName());
-        verify(employeeRepository, times(1)).findById(1L);
+        verify(employeeRepository, times(1)).findById("1L");
     }
 
     @Test

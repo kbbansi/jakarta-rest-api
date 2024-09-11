@@ -23,8 +23,8 @@ public class EmployeeService implements BasicCRUDService<CreateEmployeeDTO, Empl
     private ModelMapper mapper = new ModelMapper();
 
     @Override
-    public void delete(Long id) {
-        employeeRepository.delete(id);
+    public void delete(String displayID) {
+        employeeRepository.delete(displayID);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class EmployeeService implements BasicCRUDService<CreateEmployeeDTO, Empl
 
 
     @Override
-    public void update(Long id, CreateEmployeeDTO employeeDTO) {
+    public void update(String id, CreateEmployeeDTO employeeDTO) {
         Util.validateEmployee(employeeDTO);
 
         Employee employee = employeeRepository.findById(id);
@@ -51,9 +51,9 @@ public class EmployeeService implements BasicCRUDService<CreateEmployeeDTO, Empl
     }
 
     @Override
-    public EmployeeDTO get(Long id) {
+    public EmployeeDTO get(String displayID) {
         // TODO
-        return mapper.map(employeeRepository.findById(id), EmployeeDTO.class);
+        return mapper.map(employeeRepository.findById(displayID), EmployeeDTO.class);
     }
 
     @Override

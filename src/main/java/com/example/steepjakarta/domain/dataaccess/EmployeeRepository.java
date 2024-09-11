@@ -30,10 +30,13 @@ public class EmployeeRepository {
         entityManager.merge(employee);
     }
 
-    public Employee findById(Long id) {
-        log.info("Getting employee with display ID: " + id);
-        return Optional.ofNullable(entityManager.find(Employee.class, id))
-                .orElseThrow(() -> new IllegalArgumentException("Employee with display ID " + id + " not found."));
+    public Employee findById(String displayID) {
+        log.info("Getting employee with display ID: " + displayID);
+        Employee e = entityManager.createQuery("SELECT e FROM Employee e WHERE e.displayID = :displayID", Employee.class)
+                .setParameter("displayID", displayID)
+                .getSingleResult();
+
+        return Optional.ofNullable(e).orElseThrow(() -> new IllegalArgumentException("Employee with display ID: " + displayID + " not found"));
     }
 
     public List<Employee> getAll() {
@@ -41,10 +44,11 @@ public class EmployeeRepository {
         return entityManager.createQuery("SELECT e FROM Employee e", Employee.class).getResultList();
     }
 
-    public void delete(Long id) {
-        log.info("Deleting employee with id: " + id);
-        Employee employee = findById(id);
-        entityManager.remove(employee);
+    public void delete(String displayID) {
+        log.info("Deleting employee with displayID: " + displayID);
+        var r = entityManager.createQuery("DELETE FROM Employee e WHERE e.displayID = :displayID");
+        r.setParameter("displayID", displayID);
+        r.executeUpdate();
     }
 
     // TODO: add paginated results
