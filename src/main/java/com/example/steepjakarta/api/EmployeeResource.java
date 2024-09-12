@@ -1,6 +1,5 @@
 package com.example.steepjakarta.api;
 
-import com.example.steepjakarta.domain.dataaccess.EmployeeRepository;
 import com.example.steepjakarta.domain.datatransfer.ApiResponseDTO;
 import com.example.steepjakarta.domain.datatransfer.CreateEmployeeDTO;
 import com.example.steepjakarta.domain.datatransfer.EmployeeDTO;
@@ -9,14 +8,11 @@ import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @Path("/employee")
 public class EmployeeResource {
-    private static final Logger log = Logger.getLogger(EmployeeResource.class.getName());
 
     @Inject
     EmployeeService employeeService;
@@ -41,8 +37,9 @@ public class EmployeeResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createEmployee(CreateEmployeeDTO employeeDTO) {
-        employeeService.create(employeeDTO);
-        return Response.ok(employeeDTO).build();
+        String displayID = employeeService.create(employeeDTO);
+        ApiResponseDTO<String> response = new ApiResponseDTO<>(200, "Employee Created Successfully at: http://localhost:8080/SteepJakarta/api/v1/employee/"+ displayID);
+        return Response.ok(response).build();
     }
 
     @PUT
