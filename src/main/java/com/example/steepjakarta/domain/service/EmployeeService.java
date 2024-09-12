@@ -29,7 +29,7 @@ public class EmployeeService implements BasicCRUDService<CreateEmployeeDTO, Empl
 
     @Override
     public String create(CreateEmployeeDTO employeeDto) {
-        Util.validateEmployee(employeeDto);
+//        Util.validateEmployee(employeeDto); commenting out since we are using JakartaEE Validation
 
         Employee employee = mapToEmployee(employeeDto);
         return employeeRepository.create(employee);
@@ -38,7 +38,7 @@ public class EmployeeService implements BasicCRUDService<CreateEmployeeDTO, Empl
 
     @Override
     public void update(String id, CreateEmployeeDTO employeeDTO) {
-        Util.validateEmployee(employeeDTO);
+//        Util.validateEmployee(employeeDto); commenting out since we are using JakartaEE Validation
 
         Employee employee = employeeRepository.findById(id);
         employee.setFirstName(employeeDTO.getFirstName());

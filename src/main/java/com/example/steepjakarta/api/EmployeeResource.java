@@ -5,6 +5,7 @@ import com.example.steepjakarta.domain.datatransfer.CreateEmployeeDTO;
 import com.example.steepjakarta.domain.datatransfer.EmployeeDTO;
 import com.example.steepjakarta.domain.service.EmployeeService;
 import jakarta.inject.Inject;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -36,9 +37,9 @@ public class EmployeeResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createEmployee(CreateEmployeeDTO employeeDTO) {
+    public Response createEmployee(@Valid CreateEmployeeDTO employeeDTO) {
         String displayID = employeeService.create(employeeDTO);
-        ApiResponseDTO<String> response = new ApiResponseDTO<>(200, "Employee Created Successfully at: http://localhost:8080/SteepJakarta/api/v1/employee/"+ displayID);
+        ApiResponseDTO<String> response = new ApiResponseDTO<>(201, "Employee Created Successfully at: http://localhost:8080/SteepJakarta/api/v1/employee/"+ displayID);
         return Response.ok(response).build();
     }
 
@@ -46,7 +47,7 @@ public class EmployeeResource {
     @Path("/{displayID}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateEmployee(@PathParam("displayID") String displayID, CreateEmployeeDTO employeeDTO) {
+    public Response updateEmployee(@PathParam("displayID") String displayID, @Valid CreateEmployeeDTO employeeDTO) {
         employeeService.update(displayID, employeeDTO);
         return Response.ok(employeeDTO).build();
     }

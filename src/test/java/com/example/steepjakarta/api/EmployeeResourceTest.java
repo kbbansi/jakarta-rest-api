@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -69,7 +70,7 @@ public class EmployeeResourceTest {
 
 
     @Test
-    void testCreateEmployee() {
+    void testCreateEmployee() throws URISyntaxException {
         String expectedId = "123e4567e89b12d3a456426614174000";
         when(employeeService.create(any(CreateEmployeeDTO.class))).thenReturn(expectedId);
 
